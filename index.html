@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            text-align: center;
+            padding: 20px;
+        }
+        #chat-container {
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #chat-box {
+            height: 300px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .message {
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .user {
+            background: #007bff;
+            color: white;
+            text-align: right;
+        }
+        .bot {
+            background: #ddd;
+            text-align: left;
+        }
+        #user-input {
+            width: 80%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        #send-btn {
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>AI Chatbot</h2>
+    <div id="chat-container">
+        <div id="chat-box"></div>
+        <input type="text" id="user-input" placeholder="Type a message...">
+        <button id="send-btn">Send</button>
+    </div>
+
+    <script>
+        document.getElementById("send-btn").addEventListener("click", function() {
+            let userInput = document.getElementById("user-input").value;
+            if (userInput.trim() === "") return;
+
+            let chatBox = document.getElementById("chat-box");
+            let userMessage = `<div class="message user">${userInput}</div>`;
+            chatBox.innerHTML += userMessage;
+            
+            // Simple AI Response Simulation
+            let botResponses = {
+                "hello": "Hi there! How can I assist you today?",
+                "how are you": "I'm just a bot, but I'm here to help!",
+                "what's your name": "I'm an AI chatbot. Nice to meet you!",
+                "bye": "Goodbye! Have a great day! 😊"
+            };
+
+            let botReply = botResponses[userInput.toLowerCase()] || "I'm not sure how to respond to that. 🤖";
+            setTimeout(() => {
+                chatBox.innerHTML += `<div class="message bot">${botReply}</div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+            
+            document.getElementById("user-input").value = "";
+        });
+    </script>
+</body>
+</html>
